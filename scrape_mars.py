@@ -7,8 +7,8 @@ import pandas as pd
 
 def init_browser():
     # Initialize executable path for the chromedriver
-    executable_path = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **executable_path, headless=True)
+    executable_path = {'executable_path': 'chromedriver'}
+    browser = Browser('chrome', **executable_path, headless=False)
     
 def scrape_info():
 
@@ -108,13 +108,13 @@ def scrape_info():
     browser.quit()
 
     mars_scraped_data = {
-        'Mars Headlines' : news_title,
-        'Mars News Details' : news_para,
-        'Mars Space Image' : featured_image_url,
-        'Mars Weather Report' : mars_weather_twitter_post,
-        'Mars Facts' : mars_facts_html,
-        'Mars Hemispheres' : hemisphere_image_urls
+        'Mars_Headlines' : news_title,
+        'Mars_News_Details' : news_para,
+        'Mars_Space_Image' : featured_image_url,
+        'Mars_Weather_Report' : mars_weather_twitter_post,
+        'Mars_Facts' : mars_facts_html,
+        'Mars_Hemispheres' : hemisphere_image_urls
         }
     print (mars_scraped_data)
 
-return(mars_scraped_data)
+    return(mars_scraped_data)
