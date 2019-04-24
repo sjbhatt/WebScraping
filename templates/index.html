@@ -17,56 +17,50 @@
     </div>
     <div class="row">
 
-      <!--Latest Mars news-->
+      
       <div class="col-md-12">
-        <h3 class="heading">Latest Mars News</h3>
+        <h3>Latest Mars News</h3>
         <h5>{{mars_mission.Mars_Headlines}}</h5>
         <p>{{mars_mission.Mars_News_Details}}</p>
       </div>
     </div>
 
     
-    <div class="row">
-      
-      <!-- Featured Mars image -->
+    <div class="row">      
       <div class="col-md-8">
-        <h3 class="heading">Featured Mars Image</h3>
-        <img id="main-image" class="img-fluid" src="{{mars_mission.Mars_Space_Image}}" alt="Featured Mars Image">
+        <h3>Featured Mars Image</h3>
+        <img id="main-image" class="img-fluid" src="{{mars_mission.Mars_Space_Image}}" alt="Featured Mars Image" style= "width: 100%">
       </div>
       
-      <div class="col-md-4">
+      <div class="col-md-4">        
+        <ul>      
+          <h3>Current Mars Weather</h3>
+          <p>{{mars_mission.Mars_Weather_Report}}</p>
+        </ul>
         
-        <div class="row">
-          <!-- Current Mars weather --> 
-          <div class="col-md-12">
-            <h5 class="heading">Current Weather on Mars</h5>
-            <p>{{mars_mission.Mars_Weather_Report}}</p>
-          </div>
-        </div>
-        
-        <div class="row">
-          <!-- Mars facts --> 
-          <div class="col-md-12">
-            <h5 class="heading">Mars Facts</h5>
-            <div><small>{{mars_mission.Mars_Facts | safe}}</small></div>
-          </div>
-        </div>
+        <ul>          
+          <h3>Mars Facts</h3>
+            <div>{{mars_mission.Mars_Facts | safe}}</div>
+        </ul>
 
       </div>	
     </div>
-    
+    <p></p>
+    <p></p>
     <div class="row">
       <div class="col-md-12">
-        <h3 class="text-center">Mars Hemispheres</h3>
+        <h3 class="text-center" style = "font-weight: bold">Mars Hemispheres</h3>
+        <p></p>
       </div>
     </div>
 
-    <div class="row">
-      <!--Display pictures of the Mars hemispheres-->
-      {% for hemisphere in mars_mission.hemisphere_image_urls %}
+    <div class="row">      
+      {% for hemisphere in mars_mission.Mars_Hemispheres %}
         <div class="col-md-6">
-          <img class="img-fluid" src="{{Mars_Hemispheres.img_url}}" alt="Mars Image">
-          <h6>{{Mars_Hemispheres.title}}</h6>
+          <img class="img-fluid" src="{{hemisphere.img_url}}" alt="Hemispheres" style= "width: 75%">
+          <div class="caption" style = "font-weight: bold">{{hemisphere.title}}</div>
+          <p>
+          </p>
         </div>
       {% endfor %}
     </div>

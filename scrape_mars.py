@@ -8,7 +8,7 @@ import pandas as pd
 def init_browser():
     # Initialize executable path for the chromedriver
     executable_path = {'executable_path': 'chromedriver'}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=True)
     
 def scrape_info():
 
@@ -16,7 +16,7 @@ def scrape_info():
      
     nasa_url = "https://mars.nasa.gov/news/"
     browser.visit(nasa_url)
-    time.sleep(0.5)
+    time.sleep(1)
     html_1 = browser.html
     soup = BeautifulSoup(html_1, 'html.parser')
     news_title = soup.find('div', class_='content_title').text
@@ -26,11 +26,11 @@ def scrape_info():
 
     jpl_nasa_url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(jpl_nasa_url)
-    time.sleep(0.5)
+    time.sleep(1)
     browser.click_link_by_id('full_image')
     time.sleep(2)
     browser.click_link_by_partial_text('more info')
-    time.sleep(0.5)
+    time.sleep(1)
     html_2 = browser.html
     soup = BeautifulSoup(html_2, 'html.parser')
     images = soup.find_all('div', class_="download_tiff")
@@ -38,17 +38,22 @@ def scrape_info():
         try:
             image_1 = img.a
             image_2 = image_1['href']
-    #         print(image_2)
+            # print(image_2)
             if image_2.endswith('jpg'):
                 featured_image_url = image_2
-    #             print(featured_image_url)
+                # print(featured_image_url)
                 break
         except AttributeError as e:
-            print(e)
+            print (e)
+    # img_url = soup.find('img', class_ = 'main_image')
+    # full_img_url = img_url['src']
+    # print(full_img_url)
+    # featured_image_url = "https://www.jpl.nasa.gov" + str(full_img_url)
+    # print (featured_image_url)
 
     mars_weather_twitter_url = "https://twitter.com/marswxreport?lang=en"
     browser.visit(mars_weather_twitter_url)
-    time.sleep(0.5)
+    time.sleep(1)
     html_3 = browser.html
     soup = BeautifulSoup(html_3, 'html.parser')
     if soup.find(href=re.compile("MarsWxReport")):
@@ -58,7 +63,7 @@ def scrape_info():
 
     mars_facts_url = "https://space-facts.com/mars/"
     browser.visit(mars_facts_url)
-    time.sleep(0.5)
+    time.sleep(1)
     html_4 = browser.html
     soup = BeautifulSoup(html_4, 'html.parser')
     facts_table = soup.find('table')
@@ -79,22 +84,22 @@ def scrape_info():
 
     mars_hemispheres_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(mars_hemispheres_url)
-    time.sleep(0.5)
+    time.sleep(1)
     html_5 = browser.html
     soup = BeautifulSoup(html_5, 'html.parser')
     hemisphere_image_urls = []
     base_url = "https://astrogeology.usgs.gov"
     links = soup.find_all('div', class_="description")
     for link in links:
-        time.sleep(0.5)
+        time.sleep(1)
         title = link.h3.text
     #     print (title)
         new_link = base_url + str(link.a['href'])
     #     print(new_link)
         browser.visit(new_link)
-        time.sleep(0.5)
+        time.sleep(1)
         browser.click_link_by_partial_href('#open')
-        time.sleep(0.5)
+        time.sleep(1)
         html_6 = browser.html
         soup = BeautifulSoup(html_6, 'html.parser')
         full_img = soup.find('img', class_='wide-image')
